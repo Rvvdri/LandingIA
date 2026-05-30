@@ -1,14 +1,14 @@
 {
   "name": "landing-ia",
   "version": "1.0.0",
+  "type": "module",
   "description": "Generador de landing pages con IA y pagos Mercado Pago",
-  "main": "index.js",
   "scripts": {
     "dev": "vercel dev"
   },
   "dependencies": {
+    "mercadopago": "^2.0.6",
     "@anthropic-ai/sdk": "^0.24.0",
-    "jsonwebtoken": "^9.0.3",
-    "mercadopago": "^2.0.6"
+    "jsonwebtoken": "^9.0.2"
   }
 }
