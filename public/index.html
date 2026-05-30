@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LandingIA — Crea tu página web en segundos</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <style>
+    /* ── Barra de créditos ── */
+    .credits-bar {
+      display: flex; align-items: center; gap: 10px;
+      margin-left: auto;
+    }
+    .credits-count {
+      background: #ede9ff; color: #6C63FF;
+      font-size: 13px; font-weight: 700;
+      padding: 5px 12px; border-radius: 20px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .credits-count.low { background: #fff3e0; color: #e65100; }
+    .credits-count.empty { background: #fce4ec; color: #c62828; }
+    .btn-comprar {
+      padding: 7px 16px; background: #6C63FF; color: #fff;
+      border: none; border-radius: 8px; font-size: 13px;
+      font-weight: 600; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-comprar:hover { background: #5a52e0; }
+
+    /* ── Modal de compra ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 1000;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 20px;
+      padding: 2rem; width: 90%; max-width: 480px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .modal-sub { font-size: 14px; color: #666; margin-bottom: 1.5rem; }
+    .plan-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.25rem; }
+    .plan-card {
+      border: 2px solid #e5e5e0; border-radius: 12px;
+      padding: 1rem; text-align: center; cursor: pointer;
+      transition: all 0.15s; position: relative;
+    }
+    .plan-card:hover { border-color: #6C63FF; }
+    .plan-card.selected { border-color: #6C63FF; background: #f5f3ff; }
+    .plan-card .badge {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      background: #6C63FF; color: #fff; font-size: 10px; font-weight: 700;
+      padding: 2px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .plan-creditos { font-size: 26px; font-weight: 800; color: #1a1a1a; }
+    .plan-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .plan-precio { font-size: 15px; font-weight: 700; color: #6C63FF; }
+    .plan-ppunit { font-size: 11px; color: #aaa; }
+    .modal-email-wrap { margin-bottom: 1rem; }
+    .modal-email-wrap label { font-size: 13px; font-weight: 500; color: #444; display: block; margin-bottom: 5px; }
+    .modal-email-wrap input {
+      width: 100%; padding: 10px 13px; border: 1.5px solid #ddd;
+      border-radius: 8px; font-size: 14px; outline: none;
+    }
+    .modal-email-wrap input:focus { border-color: #6C63FF; }
+    .btn-pagar {
+      width: 100%; padding: 14px; background: #009ee3;
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.15s;
+    }
+    .btn-pagar:hover { background: #007bbf; }
+    .btn-pagar:disabled { background: #ccc; cursor: not-allowed; }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none; font-size: 22px;
+      cursor: pointer; color: #888; line-height: 1;
+    }
+    .modal-close:hover { color: #333; }
+    .modal-footer { font-size: 11px; color: #aaa; text-align: center; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">LandingIA</span>
+      <span class="logo-badge">Beta</span>
+    </div>
+    <p class="header-tagline">Genera la página web de tu negocio con inteligencia artificial</p>
+
+    <!-- Barra de créditos -->
+    <div class="credits-bar">
+      <div class="credits-count" id="creditsDisplay" style="display:none">
+        ⚡ <span id="creditsNum">0</span> créditos
+      </div>
+      <button class="btn-comprar" onclick="abrirModal()">
+        🛒 Comprar créditos
+      </button>
+    </div>
+  </header>
+
+  <div class="app">
+
+    <!-- ===== PANEL IZQUIERDO ===== -->
+    <aside class="panel">
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <div>
+            <div class="step-title">Cuéntanos sobre tu negocio</div>
+            <div class="step-sub">Esta info aparecerá en tu página web</div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="nombre">Nombre del negocio <span class="required">*</span></label>
+          <input type="text" id="nombre" placeholder="Ej: Peluquería Valentina" autocomplete="off" />
+          <span class="field-hint">El nombre que verán tus clientes</span>
+        </div>
+        <div class="field">
+          <label for="rubro">¿A qué se dedica tu negocio? <span class="required">*</span></label>
+          <select id="rubro">
+            <option value="">— Elige una categoría —</option>
+            <optgroup label="Belleza y bienestar">
+              <option>Peluquería / Estética</option>
+              <option>Spa / Masajes</option>
+              <option>Gym / Fitness</option>
+            </optgroup>
+            <optgroup label="Alimentación">
+              <option>Restaurante / Café</option>
+              <option>Pastelería / Panadería</option>
+              <option>Delivery de comida</option>
+            </optgroup>
+            <optgroup label="Comercio">
+              <option>Tienda de ropa</option>
+              <option>Florería</option>
+              <option>Ferretería / Construcción</option>
+            </optgroup>
+            <optgroup label="Servicios profesionales">
+              <option>Clínica dental</option>
+              <option>Tecnología / Informática</option>
+              <option>Consultora / Asesoría</option>
+              <option>Inmobiliaria</option>
+              <option>Educación / Academia</option>
+            </optgroup>
+            <option>Otro tipo de negocio</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="servicios">¿Qué ofreces?</label>
+          <textarea id="servicios" placeholder="Ej: Corte de cabello, tinte, peinados para novias y eventos especiales."></textarea>
+          <span class="field-hint">Mientras más detallado, mejor será tu página</span>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <div>
+            <div class="step-title">Datos de contacto</div>
+            <div class="step-sub">Para que tus clientes puedan encontrarte</div>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label for="telefono">WhatsApp / Teléfono</label>
+            <input type="text" id="telefono" placeholder="+56 9 1234 5678" />
+            <span class="field-hint">Aparece botón verde de WhatsApp</span>
+          </div>
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" placeholder="tu@correo.cl" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="ciudad">Ciudad o dirección</label>
+          <input type="text" id="ciudad" placeholder="Ej: Las Condes, Santiago" />
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <div>
+            <div class="step-title">Diseño visual</div>
+            <div class="step-sub">¿Cómo quieres que se vea tu página?</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Estilo del diseño</label>
+          <div class="style-pills">
+            <div class="pill active" onclick="selectPill(this)">✨ Moderno</div>
+            <div class="pill" onclick="selectPill(this)">💎 Elegante</div>
+            <div class="pill" onclick="selectPill(this)">⬜ Minimalista</div>
+            <div class="pill" onclick="selectPill(this)">🎨 Colorido</div>
+            <div class="pill" onclick="selectPill(this)">🏢 Corporativo</div>
+            <div class="pill" onclick="selectPill(this)">🌸 Femenino</div>
+            <div class="pill" onclick="selectPill(this)">🔥 Juvenil</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Colores de tu marca</label>
+          <div class="color-row">
+            <div class="color-item">
+              <div class="color-preview-wrap"><input type="color" id="c1" value="#6C63FF" /></div>
+              <span class="color-label">Principal</span>
+            </div>
+            <div class="color-item">
+              <div class="color-preview-wrap"><input type="color" id="c2" value="#FF6584" /></div>
+              <span class="color-label">Acento</span>
+            </div>
+            <div class="color-item">
+              <div class="color-preview-wrap"><input type="color" id="c3" value="#FFFFFF" /></div>
+              <span class="color-label">Fondo</span>
+            </div>
+            <div class="color-item">
+              <div class="color-preview-wrap"><input type="color" id="c4" value="#1a1a2e" /></div>
+              <span class="color-label">Texto</span>
+            </div>
+          </div>
+          <span class="field-hint">Haz clic en cada cuadro para cambiar el color</span>
+        </div>
+      </div>
+
+      <button class="btn-gen" id="btnGen" onclick="generar()">
+        <span class="btn-icon">✦</span>
+        <span id="btnText">Crear mi página web</span>
+      </button>
+      <p class="gen-disclaimer">
+        ⚡ Consume 1 crédito por generación &nbsp;·&nbsp; 🔒 Tus datos son privados
+      </p>
+    </aside>
+
+    <!-- ===== PREVIEW ===== -->
+    <main class="preview-area">
+      <div class="preview-toolbar">
+        <div class="preview-toolbar-left">
+          <span class="preview-dot red"></span>
+          <span class="preview-dot yellow"></span>
+          <span class="preview-dot green"></span>
+          <span id="previewLabel" class="preview-url">Tu página aparecerá aquí</span>
+        </div>
+        <div class="toolbar-actions" id="toolbarActions" style="display:none">
+          <button class="btn-sm btn-copy" onclick="copiarHTML()" id="btnCopy">📋 Copiar código</button>
+          <button class="btn-sm btn-download" onclick="descargar()" id="btnDownload">⬇ Descargar .html</button>
+        </div>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <div class="empty-illustration">
+          <div class="empty-browser">
+            <div class="empty-browser-bar"></div>
+            <div class="empty-browser-body">
+              <div class="empty-line w80"></div>
+              <div class="empty-line w60"></div>
+              <div class="empty-line w70"></div>
+              <div class="empty-blocks">
+                <div class="empty-block"></div>
+                <div class="empty-block"></div>
+                <div class="empty-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="empty-title">Aquí verás tu página</h3>
+        <p class="empty-desc">Completa el formulario y presiona <strong>"Crear mi página web"</strong>. Necesitas al menos 1 crédito.</p>
+        <div class="empty-steps">
+          <div class="empty-step"><span>1</span> Compra créditos</div>
+          <div class="empty-step-arrow">→</div>
+          <div class="empty-step"><span>2</span> Rellena los datos</div>
+          <div class="empty-step-arrow">→</div>
+          <div class="empty-step"><span>3</span> Descarga tu página</div>
+        </div>
+      </div>
+
+      <div class="loading-state" id="loadingState" style="display:none">
+        <div class="loading-animation">
+          <div class="loading-ring"></div>
+          <div class="loading-icon">✦</div>
+        </div>
+        <h3 class="loading-title">Generando tu página...</h3>
+        <p class="loading-sub">La IA está creando un diseño único para tu negocio</p>
+        <div class="loading-steps">
+          <div class="lstep active" id="ls1">→ Analizando tu negocio</div>
+          <div class="lstep" id="ls2">○ Diseñando el layout</div>
+          <div class="lstep" id="ls3">○ Escribiendo el contenido</div>
+          <div class="lstep" id="ls4">○ Aplicando colores y estilo</div>
+        </div>
+      </div>
+
+      <iframe id="previewFrame" class="preview-frame" style="display:none"></iframe>
+    </main>
+  </div>
+
+  <!-- ===== MODAL COMPRA CRÉDITOS ===== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="cerrarModalFuera(event)">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="cerrarModal()">×</button>
+      <div class="modal-title">💳 Comprar créditos</div>
+      <div class="modal-sub">Cada crédito = 1 página web generada con IA</div>
+
+      <div class="plan-grid">
+        <div class="plan-card selected" onclick="selectPlan(this,'basico')" id="plan-basico">
+          <div class="plan-creditos">3</div>
+          <div class="plan-label">créditos</div>
+          <div class="plan-precio">$4.990</div>
+          <div class="plan-ppunit">$1.663 c/u</div>
+        </div>
+        <div class="plan-card" onclick="selectPlan(this,'pro')" id="plan-pro">
+          <div class="badge">⭐ Popular</div>
+          <div class="plan-creditos">10</div>
+          <div class="plan-label">créditos</div>
+          <div class="plan-precio">$12.990</div>
+          <div class="plan-ppunit">$1.299 c/u</div>
+        </div>
+        <div class="plan-card" onclick="selectPlan(this,'agencia')" id="plan-agencia">
+          <div class="plan-creditos">30</div>
+          <div class="plan-label">créditos</div>
+          <div class="plan-precio">$29.990</div>
+          <div class="plan-ppunit">$999 c/u</div>
+        </div>
+      </div>
+
+      <div class="modal-email-wrap">
+        <label for="modalEmail">Tu correo electrónico</label>
+        <input type="email" id="modalEmail" placeholder="para@enviarte.el.acceso.cl" />
+      </div>
+
+      <button class="btn-pagar" id="btnPagar" onclick="iniciarPago()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+        Pagar con Mercado Pago
+      </button>
+      <div class="modal-footer">🔒 Pago seguro · Los créditos no vencen</div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
