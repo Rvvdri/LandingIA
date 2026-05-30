@@ -2,8 +2,8 @@
 // Recibe los datos del formulario + token de créditos
 // Valida que tenga créditos, llama a Anthropic, descuenta 1 crédito
 
-import Anthropic from '@anthropic-ai/sdk';
-import { verifyToken, decrementCredits } from './_credits.js';
+const Anthropic = require('@anthropic-ai/sdk');
+const { verifyToken, decrementCredits } = require('./_credits.js');
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 

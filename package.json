@@ -1,7 +1,6 @@
 {
   "name": "landing-ia",
   "version": "1.0.0",
-  "type": "module",
   "description": "Generador de landing pages con IA y pagos Mercado Pago",
   "scripts": {
     "dev": "vercel dev"
