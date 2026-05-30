@@ -5,1176 +5,824 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LandingIA — Crea tu página web en segundos</title>
   <style>
-/* =============================================
-   LANDING IA — styles.css
-   ============================================= */
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --purple: #6C63FF;
-  --purple-dark: #5a52e0;
-  --purple-light: #ede9ff;
-  --pink: #FF6584;
-  --green: #25D366;
-  --gray-50: #f9f9f7;
-  --gray-100: #f0efeb;
-  --gray-200: #e5e4df;
-  --gray-400: #aaa9a3;
-  --gray-600: #666560;
-  --gray-800: #333230;
-  --white: #ffffff;
-  --text: #1a1a1a;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-  background: var(--gray-50);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== HEADER ===== */
-.header {
-  background: var(--white);
-  border-bottom: 1px solid var(--gray-200);
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
-}
-
-.header-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-icon {
-  color: var(--purple);
-  font-size: 20px;
-}
-
-.logo-text {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.02em;
-}
-
-.logo-badge {
-  background: var(--purple-light);
-  color: var(--purple);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.header-tagline {
-  font-size: 13px;
-  color: var(--gray-600);
-  border-left: 1px solid var(--gray-200);
-  padding-left: 16px;
-}
-
-/* ===== LAYOUT APP ===== */
-.app {
-  display: grid;
-  grid-template-columns: 400px 1fr;
-  flex: 1;
-  height: calc(100vh - 57px);
-  overflow: hidden;
-}
-
-/* ===== PANEL IZQUIERDO ===== */
-.panel {
-  background: var(--white);
-  border-right: 1px solid var(--gray-200);
-  overflow-y: auto;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gray-200) transparent;
-}
-
-/* ===== STEP BLOCKS ===== */
-.step-block {
-  background: var(--gray-50);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-}
-
-.step-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.step-number {
-  width: 28px;
-  height: 28px;
-  background: var(--purple);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.step-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.step-sub {
-  font-size: 12px;
-  color: var(--gray-600);
-  margin-top: 2px;
-}
-
-/* ===== FIELDS ===== */
-.field {
-  margin-bottom: 12px;
-}
-
-.field:last-child {
-  margin-bottom: 0;
-}
-
-.field label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray-800);
-  margin-bottom: 5px;
-}
-
-.required {
-  color: #e53935;
-  margin-left: 2px;
-}
-
-.field input,
-.field select,
-.field textarea {
-  width: 100%;
-  padding: 10px 13px;
-  border: 1.5px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  font-family: inherit;
-  background: var(--white);
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  border-color: var(--purple);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
-}
-
-.field textarea {
-  height: 90px;
-  resize: vertical;
-  line-height: 1.5;
-}
-
-.field-hint {
-  display: block;
-  font-size: 11px;
-  color: var(--gray-400);
-  margin-top: 4px;
-}
-
-.grid2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-/* ===== PILLS ===== */
-.style-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.pill {
-  padding: 6px 13px;
-  border: 1.5px solid var(--gray-200);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  background: var(--white);
-  color: var(--gray-600);
-  transition: all 0.15s;
-  user-select: none;
-}
-
-.pill:hover {
-  border-color: var(--purple);
-  color: var(--purple);
-}
-
-.pill.active {
-  background: var(--purple);
-  color: #fff;
-  border-color: var(--purple);
-}
-
-/* ===== COLORES ===== */
-.color-row {
-  display: flex;
-  gap: 16px;
-}
-
-.color-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.color-preview-wrap {
-  width: 52px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid var(--gray-200);
-  overflow: hidden;
-  cursor: pointer;
-  transition: border-color 0.15s;
-}
-
-.color-preview-wrap:hover {
-  border-color: var(--purple);
-}
-
-.color-preview-wrap input[type=color] {
-  width: 100%;
-  height: 100%;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.color-label {
-  font-size: 11px;
-  color: var(--gray-400);
-  font-weight: 500;
-}
-
-/* ===== BOTÓN GENERAR ===== */
-.btn-gen {
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(135deg, var(--purple) 0%, #9b59b6 100%);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  letter-spacing: -0.01em;
-  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.3);
-}
-
-.btn-gen:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
-}
-
-.btn-gen:active {
-  transform: translateY(0);
-}
-
-.btn-gen:disabled {
-  background: var(--gray-200);
-  color: var(--gray-400);
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-.btn-icon {
-  font-size: 18px;
-}
-
-.gen-disclaimer {
-  font-size: 11.5px;
-  color: var(--gray-400);
-  text-align: center;
-  line-height: 1.7;
-}
-
-/* ===== PREVIEW AREA ===== */
-.preview-area {
-  display: flex;
-  flex-direction: column;
-  background: var(--gray-100);
-  overflow: hidden;
-}
-
-.preview-toolbar {
-  background: var(--gray-800);
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-}
-
-.preview-toolbar-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.preview-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.preview-dot.red    { background: #ff5f57; }
-.preview-dot.yellow { background: #febc2e; }
-.preview-dot.green  { background: #28c840; }
-
-.preview-url {
-  font-size: 12px;
-  color: #999;
-  background: rgba(255,255,255,0.08);
-  padding: 4px 12px;
-  border-radius: 6px;
-  font-family: monospace;
-  margin-left: 4px;
-}
-
-.toolbar-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-sm {
-  padding: 7px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid transparent;
-  transition: all 0.15s;
-}
-
-.btn-download {
-  background: #e8f5e9;
-  color: #2e7d32;
-  border-color: #a5d6a7;
-}
-.btn-download:hover { background: #c8e6c9; }
-
-.btn-copy {
-  background: #e3f2fd;
-  color: #1565c0;
-  border-color: #90caf9;
-}
-.btn-copy:hover { background: #bbdefb; }
-
-/* ===== EMPTY STATE ===== */
-.empty-state {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: 2rem;
-}
-
-.empty-illustration {
-  margin-bottom: 0.5rem;
-}
-
-.empty-browser {
-  width: 260px;
-  background: var(--white);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--gray-200);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-
-.empty-browser-bar {
-  background: var(--gray-100);
-  height: 32px;
-  border-bottom: 1px solid var(--gray-200);
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  gap: 6px;
-}
-
-.empty-browser-bar::before {
-  content: '';
-  width: 10px; height: 10px;
-  border-radius: 50%; background: #ff5f57;
-  box-shadow: 16px 0 0 #febc2e, 32px 0 0 #28c840;
-}
-
-.empty-browser-body {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.empty-line {
-  height: 8px;
-  background: var(--gray-100);
-  border-radius: 4px;
-}
-.empty-line.w80 { width: 80%; }
-.empty-line.w60 { width: 60%; }
-.empty-line.w70 { width: 70%; }
-
-.empty-blocks {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.empty-block {
-  flex: 1;
-  height: 48px;
-  background: var(--gray-100);
-  border-radius: var(--radius-sm);
-}
-
-.empty-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--gray-800);
-  text-align: center;
-}
-
-.empty-desc {
-  font-size: 14px;
-  color: var(--gray-600);
-  text-align: center;
-  max-width: 340px;
-  line-height: 1.7;
-}
-
-.empty-steps {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.empty-step {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--gray-600);
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-.empty-step span {
-  width: 20px;
-  height: 20px;
-  background: var(--purple-light);
-  color: var(--purple);
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.empty-step-arrow {
-  color: var(--gray-400);
-  font-size: 14px;
-}
-
-/* ===== LOADING STATE ===== */
-.loading-state {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
-}
-
-.loading-animation {
-  position: relative;
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loading-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 3px solid var(--gray-200);
-  border-top-color: var(--purple);
-  animation: spin 0.9s linear infinite;
-}
-
-.loading-icon {
-  font-size: 22px;
-  color: var(--purple);
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.loading-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--gray-800);
-}
-
-.loading-sub {
-  font-size: 14px;
-  color: var(--gray-600);
-  text-align: center;
-  max-width: 300px;
-}
-
-.loading-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.5rem;
-  min-width: 260px;
-}
-
-.lstep {
-  font-size: 13px;
-  color: var(--gray-400);
-  padding: 4px 0;
-  transition: all 0.3s;
-}
-
-.lstep.active {
-  color: var(--purple);
-  font-weight: 600;
-}
-
-.lstep.done {
-  color: #2e7d32;
-}
-
-/* ===== IFRAME PREVIEW ===== */
-.preview-frame {
-  flex: 1;
-  border: none;
-  width: 100%;
-  background: var(--white);
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .app {
-    grid-template-columns: 1fr;
-    height: auto;
-  }
-  .preview-area {
-    display: none;
-  }
-  .header-tagline {
-    display: none;
-  }
-}
-
-    /* ── Barra de créditos ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #6C63FF; --purple-dark: #5a52e0; --purple-light: #ede9ff;
+      --gray-50: #f9f9f7; --gray-100: #f0efeb; --gray-200: #e5e4df;
+      --gray-400: #aaa9a3; --gray-600: #666560; --gray-800: #333230;
+      --white: #ffffff; --text: #1a1a1a;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* HEADER */
+    .header { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .header-logo { display: flex; align-items: center; gap: 8px; }
+    .logo-icon { color: var(--purple); font-size: 20px; }
+    .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    .logo-badge { background: var(--purple-light); color: var(--purple); font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; }
+    .header-tagline { font-size: 13px; color: var(--gray-600); border-left: 1px solid var(--gray-200); padding-left: 16px; }
     .credits-bar { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-    .credits-count { background: #ede9ff; color: #6C63FF; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
+    .credits-count { background: var(--purple-light); color: var(--purple); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 20px; display: flex; align-items: center; gap: 6px; }
     .credits-count.low { background: #fff3e0; color: #e65100; }
     .credits-count.empty { background: #fce4ec; color: #c62828; }
-    .btn-comprar { padding: 7px 16px; background: #6C63FF; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
-    .btn-comprar:hover { background: #5a52e0; }
+    .btn-comprar { padding: 7px 16px; background: var(--purple); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+    .btn-comprar:hover { background: var(--purple-dark); }
+
+    /* LAYOUT */
+    .app { display: grid; grid-template-columns: 420px 1fr; flex: 1; height: calc(100vh - 57px); overflow: hidden; }
+    .panel { background: var(--white); border-right: 1px solid var(--gray-200); overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; scrollbar-width: thin; }
+
+    /* STEPS */
+    .step-block { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 1.1rem; }
+    .step-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--gray-200); }
+    .step-number { width: 28px; height: 28px; background: var(--purple); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .step-title { font-size: 14px; font-weight: 600; }
+    .step-sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+
+    /* FIELDS */
+    .field { margin-bottom: 11px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { display: block; font-size: 13px; font-weight: 500; color: var(--gray-800); margin-bottom: 5px; }
+    .required { color: #e53935; margin-left: 2px; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 9px 12px; border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm); font-size: 14px; font-family: inherit;
+      background: var(--white); color: var(--text); outline: none; transition: border-color 0.15s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(108,99,255,0.1); }
+    .field textarea { height: 75px; resize: vertical; line-height: 1.5; }
+    .field-hint { display: block; font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* TIPO PÁGINA */
+    .tipo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .tipo-card { border: 2px solid var(--gray-200); border-radius: var(--radius-md); padding: 12px; cursor: pointer; transition: all 0.15s; text-align: center; user-select: none; }
+    .tipo-card:hover { border-color: var(--purple); }
+    .tipo-card.selected { border-color: var(--purple); background: var(--purple-light); }
+    .tipo-card .tipo-icon { font-size: 24px; margin-bottom: 4px; }
+    .tipo-card .tipo-label { font-size: 12px; font-weight: 600; color: var(--gray-800); }
+
+    /* PILLS */
+    .style-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill { padding: 5px 12px; border: 1.5px solid var(--gray-200); border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; background: var(--white); color: var(--gray-600); transition: all 0.15s; user-select: none; }
+    .pill:hover { border-color: var(--purple); color: var(--purple); }
+    .pill.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+    /* COLORES */
+    .color-row { display: flex; gap: 12px; }
+    .color-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .color-preview-wrap { width: 48px; height: 38px; border-radius: var(--radius-sm); border: 1.5px solid var(--gray-200); overflow: hidden; cursor: pointer; }
+    .color-preview-wrap input[type=color] { width: 100%; height: 100%; border: none; cursor: pointer; padding: 0; }
+    .color-label { font-size: 11px; color: var(--gray-400); font-weight: 500; }
+
+    /* PRODUCTOS */
+    .productos-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+    .producto-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 10px; position: relative; }
+    .producto-item .grid3 { display: grid; grid-template-columns: 1fr 80px; gap: 8px; margin-bottom: 6px; }
+    .producto-item input, .producto-item textarea { width: 100%; padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; }
+    .producto-item input:focus, .producto-item textarea:focus { border-color: var(--purple); }
+    .producto-item textarea { height: 50px; resize: none; }
+    .btn-remove { position: absolute; top: 8px; right: 8px; background: #fce4ec; color: #c62828; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .btn-add { width: 100%; padding: 8px; border: 1.5px dashed var(--gray-200); border-radius: var(--radius-sm); background: transparent; font-size: 13px; color: var(--purple); cursor: pointer; font-weight: 500; transition: all 0.15s; }
+    .btn-add:hover { border-color: var(--purple); background: var(--purple-light); }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+    .faq-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 10px; position: relative; }
+    .faq-item input, .faq-item textarea { width: 100%; padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 6px; }
+    .faq-item textarea { height: 50px; resize: none; margin-bottom: 0; }
+
+    /* IMÁGENES */
+    .upload-area { border: 2px dashed var(--gray-200); border-radius: var(--radius-md); padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.15s; }
+    .upload-area:hover { border-color: var(--purple); background: var(--purple-light); }
+    .upload-area input[type=file] { display: none; }
+    .upload-icon { font-size: 32px; margin-bottom: 8px; }
+    .upload-text { font-size: 13px; color: var(--gray-600); }
+    .upload-hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .imagenes-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .img-thumb { position: relative; width: 70px; height: 70px; }
+    .img-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid var(--gray-200); }
+    .img-thumb .remove-img { position: absolute; top: -6px; right: -6px; background: #c62828; color: #fff; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+    /* BOTÓN GENERAR */
+    .btn-gen { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--purple) 0%, #9b59b6 100%); color: #fff; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 16px rgba(108,99,255,0.3); }
+    .btn-gen:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(108,99,255,0.4); }
+    .btn-gen:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; box-shadow: none; transform: none; }
+    .gen-disclaimer { font-size: 11.5px; color: var(--gray-400); text-align: center; line-height: 1.7; }
+
+    /* PREVIEW */
+    .preview-area { display: flex; flex-direction: column; background: var(--gray-100); overflow: hidden; }
+    .preview-toolbar { background: #1e1e1e; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .preview-toolbar-left { display: flex; align-items: center; gap: 8px; }
+    .preview-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .preview-dot.red { background: #ff5f57; } .preview-dot.yellow { background: #febc2e; } .preview-dot.green { background: #28c840; }
+    .preview-url { font-size: 12px; color: #999; background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 6px; font-family: monospace; margin-left: 4px; }
+    .toolbar-actions { display: flex; gap: 8px; }
+    .btn-sm { padding: 7px 14px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; border: 1px solid transparent; transition: all 0.15s; }
+    .btn-download { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+    .btn-download:hover { background: #c8e6c9; }
+    .btn-copy { background: #e3f2fd; color: #1565c0; border-color: #90caf9; }
+    .btn-copy:hover { background: #bbdefb; }
+    .preview-frame { flex: 1; border: none; width: 100%; background: var(--white); }
+
+    /* EMPTY STATE */
+    .empty-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem; padding: 2rem; }
+    .empty-browser { width: 260px; background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--gray-200); overflow: hidden; box-shadow: var(--shadow-md); }
+    .empty-browser-bar { background: var(--gray-100); height: 32px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+    .empty-browser-bar::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; box-shadow: 16px 0 0 #febc2e, 32px 0 0 #28c840; }
+    .empty-browser-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .empty-line { height: 8px; background: var(--gray-100); border-radius: 4px; }
+    .empty-line.w80 { width: 80%; } .empty-line.w60 { width: 60%; } .empty-line.w70 { width: 70%; }
+    .empty-blocks { display: flex; gap: 8px; margin-top: 4px; }
+    .empty-block { flex: 1; height: 48px; background: var(--gray-100); border-radius: var(--radius-sm); }
+    .empty-title { font-size: 18px; font-weight: 700; color: var(--gray-800); text-align: center; }
+    .empty-desc { font-size: 14px; color: var(--gray-600); text-align: center; max-width: 340px; line-height: 1.7; }
+    .empty-steps { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .empty-step { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gray-600); background: var(--white); border: 1px solid var(--gray-200); padding: 6px 12px; border-radius: 20px; }
+    .empty-step span { width: 20px; height: 20px; background: var(--purple-light); color: var(--purple); border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .empty-step-arrow { color: var(--gray-400); font-size: 14px; }
+
+    /* LOADING */
+    .loading-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; }
+    .loading-animation { position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; }
+    .loading-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--gray-200); border-top-color: var(--purple); animation: spin 0.9s linear infinite; }
+    .loading-icon { font-size: 22px; color: var(--purple); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-title { font-size: 20px; font-weight: 700; color: var(--gray-800); }
+    .loading-sub { font-size: 14px; color: var(--gray-600); text-align: center; max-width: 300px; }
+    .loading-steps { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 1rem 1.5rem; min-width: 260px; }
+    .lstep { font-size: 13px; color: var(--gray-400); padding: 4px 0; transition: all 0.3s; }
+    .lstep.active { color: var(--purple); font-weight: 600; }
+    .lstep.done { color: #2e7d32; }
+
+    /* MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
     .modal { background: #fff; border-radius: 20px; padding: 2rem; width: 90%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); position: relative; }
     .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
     .modal-sub { font-size: 14px; color: #666; margin-bottom: 1.5rem; }
     .plan-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.25rem; }
-    .plan-card { border: 2px solid #e5e5e0; border-radius: 12px; padding: 1rem; text-align: center; cursor: pointer; transition: all 0.15s; position: relative; }
-    .plan-card:hover { border-color: #6C63FF; }
-    .plan-card.selected { border-color: #6C63FF; background: #f5f3ff; }
-    .plan-card .badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #6C63FF; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
-    .plan-creditos { font-size: 26px; font-weight: 800; color: #1a1a1a; }
+    .plan-card { border: 2px solid var(--gray-200); border-radius: 12px; padding: 1rem; text-align: center; cursor: pointer; transition: all 0.15s; position: relative; }
+    .plan-card:hover { border-color: var(--purple); }
+    .plan-card.selected { border-color: var(--purple); background: var(--purple-light); }
+    .plan-card .badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--purple); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
+    .plan-creditos { font-size: 26px; font-weight: 800; }
     .plan-label { font-size: 12px; color: #888; margin-bottom: 6px; }
-    .plan-precio { font-size: 15px; font-weight: 700; color: #6C63FF; }
+    .plan-precio { font-size: 15px; font-weight: 700; color: var(--purple); }
     .plan-ppunit { font-size: 11px; color: #aaa; }
     .modal-email-wrap { margin-bottom: 1rem; }
     .modal-email-wrap label { font-size: 13px; font-weight: 500; color: #444; display: block; margin-bottom: 5px; }
-    .modal-email-wrap input { width: 100%; padding: 10px 13px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
-    .modal-email-wrap input:focus { border-color: #6C63FF; }
-    .btn-pagar { width: 100%; padding: 14px; background: #009ee3; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.15s; }
+    .modal-email-wrap input { width: 100%; padding: 10px 13px; border: 1.5px solid var(--gray-200); border-radius: 8px; font-size: 14px; outline: none; }
+    .modal-email-wrap input:focus { border-color: var(--purple); }
+    .btn-pagar { width: 100%; padding: 14px; background: #009ee3; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-pagar:hover { background: #007bbf; }
     .btn-pagar:disabled { background: #ccc; cursor: not-allowed; }
-    .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 22px; cursor: pointer; color: #888; line-height: 1; }
-    .modal-close:hover { color: #333; }
+    .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 22px; cursor: pointer; color: #888; }
     .modal-footer { font-size: 11px; color: #aaa; text-align: center; margin-top: 10px; }
+
+    /* SECTION TOGGLE */
+    .section-toggle { display: none; }
+    .section-toggle.visible { display: block; }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="header-logo">
-      <span class="logo-icon">✦</span>
-      <span class="logo-text">LandingIA</span>
-      <span class="logo-badge">Beta</span>
-    </div>
-    <p class="header-tagline">Genera la página web de tu negocio con inteligencia artificial</p>
-    <div class="credits-bar">
-      <div class="credits-count" id="creditsDisplay" style="display:none">
-        ⚡ <span id="creditsNum">0</span> créditos
-      </div>
-      <button class="btn-comprar" onclick="abrirModal()">🛒 Comprar créditos</button>
-    </div>
-  </header>
 
-  <div class="app">
-    <aside class="panel">
-      <div class="step-block">
-        <div class="step-header">
-          <div class="step-number">1</div>
-          <div><div class="step-title">Cuéntanos sobre tu negocio</div><div class="step-sub">Esta info aparecerá en tu página web</div></div>
-        </div>
-        <div class="field">
-          <label for="nombre">Nombre del negocio <span class="required">*</span></label>
-          <input type="text" id="nombre" placeholder="Ej: Peluquería Valentina" autocomplete="off" />
-          <span class="field-hint">El nombre que verán tus clientes</span>
-        </div>
-        <div class="field">
-          <label for="rubro">¿A qué se dedica tu negocio? <span class="required">*</span></label>
-          <select id="rubro">
-            <option value="">— Elige una categoría —</option>
-            <optgroup label="Belleza y bienestar">
-              <option>Peluquería / Estética</option>
-              <option>Spa / Masajes</option>
-              <option>Gym / Fitness</option>
-            </optgroup>
-            <optgroup label="Alimentación">
-              <option>Restaurante / Café</option>
-              <option>Pastelería / Panadería</option>
-              <option>Delivery de comida</option>
-            </optgroup>
-            <optgroup label="Comercio">
-              <option>Tienda de ropa</option>
-              <option>Florería</option>
-              <option>Ferretería / Construcción</option>
-            </optgroup>
-            <optgroup label="Servicios profesionales">
-              <option>Clínica dental</option>
-              <option>Tecnología / Informática</option>
-              <option>Consultora / Asesoría</option>
-              <option>Inmobiliaria</option>
-              <option>Educación / Academia</option>
-            </optgroup>
-            <option>Otro tipo de negocio</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="servicios">¿Qué ofreces?</label>
-          <textarea id="servicios" placeholder="Ej: Corte de cabello, tinte, peinados para novias y eventos especiales."></textarea>
-          <span class="field-hint">Mientras más detallado, mejor será tu página</span>
-        </div>
-      </div>
-
-      <div class="step-block">
-        <div class="step-header">
-          <div class="step-number">2</div>
-          <div><div class="step-title">Datos de contacto</div><div class="step-sub">Para que tus clientes puedan encontrarte</div></div>
-        </div>
-        <div class="grid2">
-          <div class="field">
-            <label for="telefono">WhatsApp / Teléfono</label>
-            <input type="text" id="telefono" placeholder="+56 9 1234 5678" />
-            <span class="field-hint">Botón verde de WhatsApp</span>
-          </div>
-          <div class="field">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" placeholder="tu@correo.cl" />
-          </div>
-        </div>
-        <div class="field">
-          <label for="ciudad">Ciudad o dirección</label>
-          <input type="text" id="ciudad" placeholder="Ej: Las Condes, Santiago" />
-        </div>
-      </div>
-
-      <div class="step-block">
-        <div class="step-header">
-          <div class="step-number">3</div>
-          <div><div class="step-title">Diseño visual</div><div class="step-sub">¿Cómo quieres que se vea tu página?</div></div>
-        </div>
-        <div class="field">
-          <label>Estilo del diseño</label>
-          <div class="style-pills">
-            <div class="pill active" onclick="selectPill(this)">✨ Moderno</div>
-            <div class="pill" onclick="selectPill(this)">💎 Elegante</div>
-            <div class="pill" onclick="selectPill(this)">⬜ Minimalista</div>
-            <div class="pill" onclick="selectPill(this)">🎨 Colorido</div>
-            <div class="pill" onclick="selectPill(this)">🏢 Corporativo</div>
-            <div class="pill" onclick="selectPill(this)">🌸 Femenino</div>
-            <div class="pill" onclick="selectPill(this)">🔥 Juvenil</div>
-          </div>
-        </div>
-        <div class="field">
-          <label>Colores de tu marca</label>
-          <div class="color-row">
-            <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c1" value="#6C63FF" /></div><span class="color-label">Principal</span></div>
-            <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c2" value="#FF6584" /></div><span class="color-label">Acento</span></div>
-            <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c3" value="#FFFFFF" /></div><span class="color-label">Fondo</span></div>
-            <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c4" value="#1a1a2e" /></div><span class="color-label">Texto</span></div>
-          </div>
-          <span class="field-hint">Haz clic en cada cuadro para cambiar el color</span>
-        </div>
-      </div>
-
-      <button class="btn-gen" id="btnGen" onclick="generar()">
-        <span class="btn-icon">✦</span>
-        <span id="btnText">Crear mi página web</span>
-      </button>
-      <p class="gen-disclaimer">⚡ Consume 1 crédito por generación &nbsp;·&nbsp; 🔒 Tus datos son privados</p>
-    </aside>
-
-    <main class="preview-area">
-      <div class="preview-toolbar">
-        <div class="preview-toolbar-left">
-          <span class="preview-dot red"></span>
-          <span class="preview-dot yellow"></span>
-          <span class="preview-dot green"></span>
-          <span id="previewLabel" class="preview-url">Tu página aparecerá aquí</span>
-        </div>
-        <div class="toolbar-actions" id="toolbarActions" style="display:none">
-          <button class="btn-sm btn-copy" onclick="copiarHTML()" id="btnCopy">📋 Copiar código</button>
-          <button class="btn-sm btn-download" onclick="descargar()" id="btnDownload">⬇ Descargar .html</button>
-        </div>
-      </div>
-
-      <div class="empty-state" id="emptyState">
-        <div class="empty-illustration">
-          <div class="empty-browser">
-            <div class="empty-browser-bar"></div>
-            <div class="empty-browser-body">
-              <div class="empty-line w80"></div>
-              <div class="empty-line w60"></div>
-              <div class="empty-line w70"></div>
-              <div class="empty-blocks">
-                <div class="empty-block"></div>
-                <div class="empty-block"></div>
-                <div class="empty-block"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h3 class="empty-title">Aquí verás tu página</h3>
-        <p class="empty-desc">Completa el formulario y presiona <strong>"Crear mi página web"</strong>. Necesitas al menos 1 crédito.</p>
-        <div class="empty-steps">
-          <div class="empty-step"><span>1</span> Compra créditos</div>
-          <div class="empty-step-arrow">→</div>
-          <div class="empty-step"><span>2</span> Rellena los datos</div>
-          <div class="empty-step-arrow">→</div>
-          <div class="empty-step"><span>3</span> Descarga tu página</div>
-        </div>
-      </div>
-
-      <div class="loading-state" id="loadingState" style="display:none">
-        <div class="loading-animation">
-          <div class="loading-ring"></div>
-          <div class="loading-icon">✦</div>
-        </div>
-        <h3 class="loading-title">Generando tu página...</h3>
-        <p class="loading-sub">La IA está creando un diseño único para tu negocio</p>
-        <div class="loading-steps">
-          <div class="lstep active" id="ls1">→ Analizando tu negocio</div>
-          <div class="lstep" id="ls2">○ Diseñando el layout</div>
-          <div class="lstep" id="ls3">○ Escribiendo el contenido</div>
-          <div class="lstep" id="ls4">○ Aplicando colores y estilo</div>
-        </div>
-      </div>
-
-      <iframe id="previewFrame" class="preview-frame" style="display:none"></iframe>
-    </main>
+<header class="header">
+  <div class="header-logo">
+    <span class="logo-icon">✦</span>
+    <span class="logo-text">LandingIA</span>
+    <span class="logo-badge">Beta</span>
   </div>
-
-  <div class="modal-overlay" id="modalOverlay" onclick="cerrarModalFuera(event)">
-    <div class="modal">
-      <button class="modal-close" onclick="cerrarModal()">×</button>
-      <div class="modal-title">💳 Comprar créditos</div>
-      <div class="modal-sub">Cada crédito = 1 página web generada con IA</div>
-      <div class="plan-grid">
-        <div class="plan-card selected" onclick="selectPlan(this,'basico')" id="plan-basico">
-          <div class="plan-creditos">3</div>
-          <div class="plan-label">créditos</div>
-          <div class="plan-precio">$4.990</div>
-          <div class="plan-ppunit">$1.663 c/u</div>
-        </div>
-        <div class="plan-card" onclick="selectPlan(this,'pro')" id="plan-pro">
-          <div class="badge">⭐ Popular</div>
-          <div class="plan-creditos">10</div>
-          <div class="plan-label">créditos</div>
-          <div class="plan-precio">$12.990</div>
-          <div class="plan-ppunit">$1.299 c/u</div>
-        </div>
-        <div class="plan-card" onclick="selectPlan(this,'agencia')" id="plan-agencia">
-          <div class="plan-creditos">30</div>
-          <div class="plan-label">créditos</div>
-          <div class="plan-precio">$29.990</div>
-          <div class="plan-ppunit">$999 c/u</div>
-        </div>
-      </div>
-      <div class="modal-email-wrap">
-        <label for="modalEmail">Tu correo electrónico</label>
-        <input type="email" id="modalEmail" placeholder="para@enviarte.el.acceso.cl" />
-      </div>
-      <button class="btn-pagar" id="btnPagar" onclick="iniciarPago()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-        Pagar con Mercado Pago
-      </button>
-      <div class="modal-footer">🔒 Pago seguro · Los créditos no vencen</div>
+  <p class="header-tagline">Genera la página web de tu negocio con inteligencia artificial</p>
+  <div class="credits-bar">
+    <div class="credits-count" id="creditsDisplay" style="display:none">
+      ⚡ <span id="creditsNum">0</span> créditos
     </div>
+    <button class="btn-comprar" onclick="abrirModal()">🛒 Comprar créditos</button>
   </div>
+</header>
 
-  <script>
-/* =============================================
-   LANDING IA — public/js/app.js
-   Lógica del frontend: créditos, modal, generación
-   ============================================= */
+<div class="app">
+  <aside class="panel">
 
-let generatedHTML = '';
-let selectedEstilo = 'Moderno';
-let selectedPlan = 'basico';
-let creditToken = null;   // JWT con créditos
-let creditCount = 0;
+    <!-- PASO 1: Tipo de página -->
+    <div class="step-block">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <div><div class="step-title">¿Qué tipo de página necesitas?</div><div class="step-sub">Puedes elegir más de una opción</div></div>
+      </div>
+      <div class="tipo-grid">
+        <div class="tipo-card selected" onclick="toggleTipo(this,'landing')" data-tipo="landing">
+          <div class="tipo-icon">🏠</div>
+          <div class="tipo-label">Presentación del negocio</div>
+        </div>
+        <div class="tipo-card" onclick="toggleTipo(this,'servicios')" data-tipo="servicios">
+          <div class="tipo-icon">⚙️</div>
+          <div class="tipo-label">Servicios</div>
+        </div>
+        <div class="tipo-card" onclick="toggleTipo(this,'productos')" data-tipo="productos">
+          <div class="tipo-icon">🛍️</div>
+          <div class="tipo-label">Tienda / Catálogo</div>
+        </div>
+        <div class="tipo-card" onclick="toggleTipo(this,'galeria')" data-tipo="galeria">
+          <div class="tipo-icon">🖼️</div>
+          <div class="tipo-label">Galería de fotos</div>
+        </div>
+        <div class="tipo-card" onclick="toggleTipo(this,'contacto')" data-tipo="contacto">
+          <div class="tipo-icon">📩</div>
+          <div class="tipo-label">Formulario de contacto</div>
+        </div>
+        <div class="tipo-card" onclick="toggleTipo(this,'faq')" data-tipo="faq">
+          <div class="tipo-icon">❓</div>
+          <div class="tipo-label">Preguntas frecuentes</div>
+        </div>
+      </div>
+    </div>
 
-/* ─── Al cargar la página ─── */
-document.addEventListener('DOMContentLoaded', () => {
-  cargarCreditos();
-  leerTokenDesdeURL();
-});
+    <!-- PASO 2: Info del negocio -->
+    <div class="step-block">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <div><div class="step-title">Cuéntanos sobre tu negocio</div><div class="step-sub">Esta información aparecerá en la página</div></div>
+      </div>
+      <div class="field">
+        <label>Nombre del negocio <span class="required">*</span></label>
+        <input type="text" id="nombre" placeholder="Ej: Peluquería Valentina" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label>Rubro <span class="required">*</span></label>
+        <select id="rubro">
+          <option value="">— Elige una categoría —</option>
+          <optgroup label="Belleza y bienestar">
+            <option>Peluquería / Estética</option><option>Spa / Masajes</option><option>Gym / Fitness</option>
+          </optgroup>
+          <optgroup label="Alimentación">
+            <option>Restaurante / Café</option><option>Pastelería / Panadería</option><option>Delivery de comida</option>
+          </optgroup>
+          <optgroup label="Comercio">
+            <option>Tienda de ropa</option><option>Florería</option><option>Ferretería / Construcción</option>
+          </optgroup>
+          <optgroup label="Servicios profesionales">
+            <option>Clínica dental</option><option>Tecnología / Informática</option>
+            <option>Consultora / Asesoría</option><option>Inmobiliaria</option><option>Educación / Academia</option>
+          </optgroup>
+          <option>Otro tipo de negocio</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Descripción del negocio</label>
+        <textarea id="descripcion" placeholder="Ej: Somos una peluquería familiar con 10 años de experiencia, especialistas en tintes y peinados para eventos..."></textarea>
+        <span class="field-hint">Mientras más detallado, mejor será el contenido generado</span>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>Horario de atención</label>
+          <input type="text" id="horario" placeholder="Lun-Vie 9:00-18:00" />
+        </div>
+        <div class="field">
+          <label>Ciudad</label>
+          <input type="text" id="ciudad" placeholder="Santiago" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Redes sociales</label>
+        <input type="text" id="redesSociales" placeholder="@mi_negocio en Instagram, Facebook: /minegocio" />
+      </div>
+    </div>
 
-/* ─── Leer token si vuelve de Mercado Pago ─── */
-function leerTokenDesdeURL() {
-  const hash = window.location.hash;
-  if (!hash.includes('token=')) return;
+    <!-- PASO 3: Contacto -->
+    <div class="step-block">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <div><div class="step-title">Datos de contacto</div><div class="step-sub">Para que tus clientes puedan escribirte</div></div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>WhatsApp / Teléfono</label>
+          <input type="text" id="telefono" placeholder="+56912345678" />
+          <span class="field-hint">Aparece botón verde flotante</span>
+        </div>
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" id="email" placeholder="tu@correo.cl" />
+        </div>
+      </div>
+    </div>
 
-  const params = new URLSearchParams(hash.replace('#', ''));
-  const token = params.get('token');
-  const creditos = parseInt(params.get('creditos') || '0');
+    <!-- PASO 4: Productos (condicional) -->
+    <div class="step-block section-toggle" id="seccionProductos">
+      <div class="step-header">
+        <div class="step-number">4</div>
+        <div><div class="step-title">Productos o servicios</div><div class="step-sub">Agrega los items de tu catálogo</div></div>
+      </div>
+      <div class="productos-list" id="productosList"></div>
+      <button class="btn-add" onclick="agregarProducto()">+ Agregar producto o servicio</button>
+    </div>
 
-  if (token) {
-    // Sumar a créditos existentes si ya tenía
-    const prevCount = parseInt(localStorage.getItem('landing_credits') || '0');
-    creditToken = token;
-    creditCount = creditos + prevCount;
-    guardarCreditos();
-    window.location.hash = '';
-    mostrarNotificacion(`✅ ¡Pago exitoso! Tienes ${creditCount} créditos disponibles.`);
+    <!-- PASO 5: FAQ (condicional) -->
+    <div class="step-block section-toggle" id="seccionFaq">
+      <div class="step-header">
+        <div class="step-number">5</div>
+        <div><div class="step-title">Preguntas frecuentes</div><div class="step-sub">Las dudas más comunes de tus clientes</div></div>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+      <button class="btn-add" onclick="agregarFaq()">+ Agregar pregunta</button>
+    </div>
+
+    <!-- PASO 6: Imágenes -->
+    <div class="step-block">
+      <div class="step-header">
+        <div class="step-number">6</div>
+        <div><div class="step-title">Fotos del negocio</div><div class="step-sub">Opcionales — se incluyen dentro del HTML</div></div>
+      </div>
+      <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" accept="image/*" multiple onchange="handleImages(event)" />
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">Haz clic para subir fotos</div>
+        <div class="upload-hint">JPG, PNG o WebP · Máx 5 fotos · 2MB cada una</div>
+      </div>
+      <div class="imagenes-preview" id="imagenesPreview"></div>
+    </div>
+
+    <!-- PASO 7: Diseño -->
+    <div class="step-block">
+      <div class="step-header">
+        <div class="step-number">7</div>
+        <div><div class="step-title">Diseño visual</div><div class="step-sub">El estilo de tu página web</div></div>
+      </div>
+      <div class="field">
+        <label>Estilo del diseño</label>
+        <div class="style-pills">
+          <div class="pill active" onclick="selectPill(this)">✨ Moderno</div>
+          <div class="pill" onclick="selectPill(this)">💎 Elegante</div>
+          <div class="pill" onclick="selectPill(this)">⬜ Minimalista</div>
+          <div class="pill" onclick="selectPill(this)">🎨 Colorido</div>
+          <div class="pill" onclick="selectPill(this)">🏢 Corporativo</div>
+          <div class="pill" onclick="selectPill(this)">🌸 Femenino</div>
+          <div class="pill" onclick="selectPill(this)">🔥 Juvenil</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Colores de tu marca</label>
+        <div class="color-row">
+          <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c1" value="#6C63FF" /></div><span class="color-label">Principal</span></div>
+          <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c2" value="#FF6584" /></div><span class="color-label">Acento</span></div>
+          <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c3" value="#FFFFFF" /></div><span class="color-label">Fondo</span></div>
+          <div class="color-item"><div class="color-preview-wrap"><input type="color" id="c4" value="#1a1a2e" /></div><span class="color-label">Texto</span></div>
+        </div>
+        <span class="field-hint">Haz clic en cada cuadro para cambiar el color</span>
+      </div>
+    </div>
+
+    <button class="btn-gen" id="btnGen" onclick="generar()">
+      <span>✦</span>
+      <span id="btnText">Crear mi página web</span>
+    </button>
+    <p class="gen-disclaimer">⚡ Consume 1 crédito por generación &nbsp;·&nbsp; 🔒 Tus datos son privados</p>
+
+  </aside>
+
+  <!-- PREVIEW -->
+  <main class="preview-area">
+    <div class="preview-toolbar">
+      <div class="preview-toolbar-left">
+        <span class="preview-dot red"></span>
+        <span class="preview-dot yellow"></span>
+        <span class="preview-dot green"></span>
+        <span id="previewLabel" class="preview-url">Tu página aparecerá aquí</span>
+      </div>
+      <div class="toolbar-actions" id="toolbarActions" style="display:none">
+        <button class="btn-sm btn-copy" onclick="copiarHTML()" id="btnCopy">📋 Copiar código</button>
+        <button class="btn-sm btn-download" onclick="descargar()" id="btnDownload">⬇ Descargar .html</button>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-browser">
+        <div class="empty-browser-bar"></div>
+        <div class="empty-browser-body">
+          <div class="empty-line w80"></div><div class="empty-line w60"></div><div class="empty-line w70"></div>
+          <div class="empty-blocks"><div class="empty-block"></div><div class="empty-block"></div><div class="empty-block"></div></div>
+        </div>
+      </div>
+      <h3 class="empty-title">Aquí verás tu página</h3>
+      <p class="empty-desc">Completa el formulario y presiona <strong>"Crear mi página web"</strong>. Necesitas al menos 1 crédito.</p>
+      <div class="empty-steps">
+        <div class="empty-step"><span>1</span> Compra créditos</div>
+        <div class="empty-step-arrow">→</div>
+        <div class="empty-step"><span>2</span> Rellena los datos</div>
+        <div class="empty-step-arrow">→</div>
+        <div class="empty-step"><span>3</span> Descarga tu página</div>
+      </div>
+    </div>
+
+    <div class="loading-state" id="loadingState" style="display:none">
+      <div class="loading-animation"><div class="loading-ring"></div><div class="loading-icon">✦</div></div>
+      <h3 class="loading-title">Generando tu página...</h3>
+      <p class="loading-sub">La IA está creando un diseño único para tu negocio</p>
+      <div class="loading-steps">
+        <div class="lstep active" id="ls1">→ Analizando tu negocio</div>
+        <div class="lstep" id="ls2">○ Diseñando el layout</div>
+        <div class="lstep" id="ls3">○ Escribiendo el contenido</div>
+        <div class="lstep" id="ls4">○ Aplicando colores y estilo</div>
+      </div>
+    </div>
+
+    <iframe id="previewFrame" class="preview-frame" style="display:none"></iframe>
+  </main>
+</div>
+
+<!-- MODAL CRÉDITOS -->
+<div class="modal-overlay" id="modalOverlay" onclick="cerrarModalFuera(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="cerrarModal()">×</button>
+    <div class="modal-title">💳 Comprar créditos</div>
+    <div class="modal-sub">Cada crédito = 1 página web generada con IA</div>
+    <div class="plan-grid">
+      <div class="plan-card selected" onclick="selectPlan(this,'basico')" id="plan-basico">
+        <div class="plan-creditos">3</div><div class="plan-label">créditos</div>
+        <div class="plan-precio">$4.990</div><div class="plan-ppunit">$1.663 c/u</div>
+      </div>
+      <div class="plan-card" onclick="selectPlan(this,'pro')" id="plan-pro">
+        <div class="badge">⭐ Popular</div>
+        <div class="plan-creditos">10</div><div class="plan-label">créditos</div>
+        <div class="plan-precio">$12.990</div><div class="plan-ppunit">$1.299 c/u</div>
+      </div>
+      <div class="plan-card" onclick="selectPlan(this,'agencia')" id="plan-agencia">
+        <div class="plan-creditos">30</div><div class="plan-label">créditos</div>
+        <div class="plan-precio">$29.990</div><div class="plan-ppunit">$999 c/u</div>
+      </div>
+    </div>
+    <div class="modal-email-wrap">
+      <label>Tu correo electrónico</label>
+      <input type="email" id="modalEmail" placeholder="tu@correo.cl" />
+    </div>
+    <button class="btn-pagar" onclick="iniciarPago()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+      Pagar con Mercado Pago
+    </button>
+    <div class="modal-footer">🔒 Pago seguro · Los créditos no vencen</div>
+  </div>
+</div>
+
+<script>
+  let generatedHTML = '';
+  let selectedEstilo = 'Moderno';
+  let selectedPlan = 'basico';
+  let creditToken = null;
+  let creditCount = 0;
+  let tiposSeleccionados = new Set(['landing']);
+  let productos = [];
+  let faqs = [];
+  let imagenes = []; // { nombre, base64, tipo }
+
+  // ── Init ──
+  document.addEventListener('DOMContentLoaded', () => {
+    cargarCreditos();
+    leerTokenDesdeURL();
+    agregarProducto();
+    agregarFaq();
+  });
+
+  // ── URL token tras pago ──
+  function leerTokenDesdeURL() {
+    const hash = window.location.hash;
+    if (!hash.includes('token=')) return;
+    const params = new URLSearchParams(hash.replace('#', ''));
+    const token = params.get('token');
+    const creditos = parseInt(params.get('creditos') || '0');
+    if (token) {
+      creditToken = token;
+      creditCount = creditos + parseInt(localStorage.getItem('landing_credits') || '0');
+      guardarCreditos();
+      window.location.hash = '';
+      mostrarToast(`✅ ¡Pago exitoso! Tienes ${creditCount} créditos.`);
+    }
   }
-}
 
-/* ─── Guardar / cargar créditos en localStorage ─── */
-function guardarCreditos() {
-  if (creditToken) localStorage.setItem('landing_token', creditToken);
-  localStorage.setItem('landing_credits', String(creditCount));
-  actualizarBarraCreditos();
-}
-
-function cargarCreditos() {
-  creditToken = localStorage.getItem('landing_token') || null;
-  creditCount = parseInt(localStorage.getItem('landing_credits') || '0');
-  actualizarBarraCreditos();
-}
-
-function actualizarBarraCreditos() {
-  const display = document.getElementById('creditsDisplay');
-  const num = document.getElementById('creditsNum');
-  if (!display || !num) return;
-
-  if (creditCount > 0) {
-    display.style.display = 'flex';
-    num.textContent = creditCount;
-    display.className = 'credits-count' + (creditCount <= 2 ? ' low' : '');
-  } else if (creditToken !== null) {
-    display.style.display = 'flex';
-    num.textContent = '0';
-    display.className = 'credits-count empty';
-  } else {
-    display.style.display = 'none';
-  }
-}
-
-/* ─── Modal de compra ─── */
-function abrirModal() {
-  document.getElementById('modalOverlay').classList.add('open');
-}
-
-function cerrarModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-}
-
-function cerrarModalFuera(e) {
-  if (e.target === document.getElementById('modalOverlay')) cerrarModal();
-}
-
-function selectPlan(el, plan) {
-  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedPlan = plan;
-}
-
-async function iniciarPago() {
-  const email = document.getElementById('modalEmail').value.trim();
-  if (!email || !email.includes('@')) {
-    alert('Por favor ingresa un correo válido para enviarte el acceso.');
-    return;
+  function guardarCreditos() {
+    if (creditToken) localStorage.setItem('landing_token', creditToken);
+    localStorage.setItem('landing_credits', String(creditCount));
+    actualizarBarraCreditos();
   }
 
-  const btn = document.getElementById('btnPagar');
-  btn.disabled = true;
-  btn.textContent = 'Redirigiendo...';
+  function cargarCreditos() {
+    creditToken = localStorage.getItem('landing_token') || null;
+    creditCount = parseInt(localStorage.getItem('landing_credits') || '0');
+    actualizarBarraCreditos();
+  }
 
-  try {
-    const res = await fetch('/api/crear-pago', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plan: selectedPlan, email })
-    });
-
-    const data = await res.json();
-    if (data.checkoutUrl) {
-      window.location.href = data.checkoutUrl;
+  function actualizarBarraCreditos() {
+    const display = document.getElementById('creditsDisplay');
+    const num = document.getElementById('creditsNum');
+    if (!display || !num) return;
+    if (creditCount > 0) {
+      display.style.display = 'flex';
+      num.textContent = creditCount;
+      display.className = 'credits-count' + (creditCount <= 2 ? ' low' : '');
+    } else if (creditToken) {
+      display.style.display = 'flex';
+      num.textContent = '0';
+      display.className = 'credits-count empty';
     } else {
-      throw new Error(data.error || 'Error al crear el pago');
+      display.style.display = 'none';
     }
-  } catch (err) {
-    alert('Error: ' + err.message);
-    btn.disabled = false;
-    btn.textContent = 'Pagar con Mercado Pago';
   }
-}
 
-/* ─── Estilo visual ─── */
-function selectPill(el) {
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  selectedEstilo = el.textContent.replace(/[✨💎⬜🎨🏢🌸🔥]/gu, '').trim();
-}
+  // ── Tipo de página ──
+  function toggleTipo(el, tipo) {
+    el.classList.toggle('selected');
+    if (tiposSeleccionados.has(tipo)) tiposSeleccionados.delete(tipo);
+    else tiposSeleccionados.add(tipo);
 
-/* ─── Animación pasos de carga ─── */
-function animateLoadingSteps() {
-  const steps = ['ls1', 'ls2', 'ls3', 'ls4'];
-  const delays = [0, 4000, 8000, 12000];
-  steps.forEach((id, i) => {
-    setTimeout(() => {
-      if (i > 0) {
-        const prev = document.getElementById(steps[i - 1]);
-        if (prev) { prev.classList.remove('active'); prev.classList.add('done'); }
+    document.getElementById('seccionProductos').className =
+      'step-block section-toggle' + (tiposSeleccionados.has('productos') ? ' visible' : '');
+    document.getElementById('seccionFaq').className =
+      'step-block section-toggle' + (tiposSeleccionados.has('faq') ? ' visible' : '');
+  }
+
+  // ── Productos ──
+  function agregarProducto() {
+    const id = Date.now();
+    productos.push({ id, nombre: '', precio: '', descripcion: '' });
+    renderProductos();
+  }
+
+  function eliminarProducto(id) {
+    productos = productos.filter(p => p.id !== id);
+    renderProductos();
+  }
+
+  function renderProductos() {
+    const lista = document.getElementById('productosList');
+    lista.innerHTML = productos.map(p => `
+      <div class="producto-item">
+        <button class="btn-remove" onclick="eliminarProducto(${p.id})">×</button>
+        <div class="grid3">
+          <input type="text" placeholder="Nombre del producto" value="${p.nombre}"
+            oninput="actualizarProducto(${p.id},'nombre',this.value)" />
+          <input type="text" placeholder="$Precio" value="${p.precio}"
+            oninput="actualizarProducto(${p.id},'precio',this.value)" />
+        </div>
+        <textarea placeholder="Descripción breve del producto o servicio"
+          oninput="actualizarProducto(${p.id},'descripcion',this.value)">${p.descripcion}</textarea>
+      </div>
+    `).join('');
+  }
+
+  function actualizarProducto(id, campo, valor) {
+    const prod = productos.find(p => p.id === id);
+    if (prod) prod[campo] = valor;
+  }
+
+  // ── FAQ ──
+  function agregarFaq() {
+    const id = Date.now();
+    faqs.push({ id, pregunta: '', respuesta: '' });
+    renderFaqs();
+  }
+
+  function eliminarFaq(id) {
+    faqs = faqs.filter(f => f.id !== id);
+    renderFaqs();
+  }
+
+  function renderFaqs() {
+    const lista = document.getElementById('faqList');
+    lista.innerHTML = faqs.map(f => `
+      <div class="faq-item">
+        <button class="btn-remove" onclick="eliminarFaq(${f.id})">×</button>
+        <input type="text" placeholder="¿Cuál es tu pregunta frecuente?" value="${f.pregunta}"
+          oninput="actualizarFaq(${f.id},'pregunta',this.value)" />
+        <textarea placeholder="Respuesta"
+          oninput="actualizarFaq(${f.id},'respuesta',this.value)">${f.respuesta}</textarea>
+      </div>
+    `).join('');
+  }
+
+  function actualizarFaq(id, campo, valor) {
+    const faq = faqs.find(f => f.id === id);
+    if (faq) faq[campo] = valor;
+  }
+
+  // ── Imágenes ──
+  function handleImages(event) {
+    const files = Array.from(event.target.files);
+    const disponibles = 5 - imagenes.length;
+    const aSubir = files.slice(0, disponibles);
+
+    aSubir.forEach(file => {
+      if (file.size > 2 * 1024 * 1024) {
+        mostrarToast(`⚠️ ${file.name} supera 2MB y fue omitida.`, 'warn');
+        return;
       }
-      const el = document.getElementById(id);
-      if (el) { el.classList.add('active'); el.textContent = el.textContent.replace('○', '→'); }
-    }, delays[i]);
-  });
-}
-
-function resetLoadingSteps() {
-  const labels = ['Analizando tu negocio', 'Diseñando el layout', 'Escribiendo el contenido', 'Aplicando colores y estilo'];
-  ['ls1','ls2','ls3','ls4'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.className = 'lstep' + (i === 0 ? ' active' : '');
-      el.textContent = (i === 0 ? '→ ' : '○ ') + labels[i];
-    }
-  });
-}
-
-/* ─── Generar landing ─── */
-async function generar() {
-  const nombre = document.getElementById('nombre').value.trim();
-  const rubro  = document.getElementById('rubro').value;
-
-  if (!nombre || !rubro) {
-    alert('Por favor ingresa el nombre y el rubro de tu negocio.');
-    return;
-  }
-
-  // Verificar créditos
-  // Verificar créditos (MODO TEST - quitar antes de producción)
-const MODO_TEST = true;
-if (!MODO_TEST && (!creditToken || creditCount <= 0)) {
-    mostrarNotificacion('⚡ Necesitas créditos para generar. ¡Compra un pack!', 'warn');
-    abrirModal();
-    return;
-  }
-
-  const btn = document.getElementById('btnGen');
-  btn.disabled = true;
-  document.getElementById('btnText').textContent = 'Generando...';
-  document.getElementById('emptyState').style.display   = 'none';
-  document.getElementById('previewFrame').style.display = 'none';
-  document.getElementById('toolbarActions').style.display = 'none';
-  document.getElementById('loadingState').style.display = 'flex';
-  document.getElementById('previewLabel').textContent   = 'generando...';
-  resetLoadingSteps();
-  animateLoadingSteps();
-
-  const body = {
-    nombre, rubro,
-    servicios: document.getElementById('servicios').value.trim(),
-    telefono:  document.getElementById('telefono').value.trim(),
-    email:     document.getElementById('email').value.trim(),
-    ciudad:    document.getElementById('ciudad').value.trim(),
-    estilo:    selectedEstilo,
-    c1: document.getElementById('c1').value,
-    c2: document.getElementById('c2').value,
-    c3: document.getElementById('c3').value,
-    c4: document.getElementById('c4').value,
-  };
-
-  try {
-    const res = await fetch('/api/generar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${creditToken}`
-      },
-      body: JSON.stringify(body)
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64 = e.target.result;
+        imagenes.push({ nombre: file.name, base64, tipo: file.type });
+        renderImagenes();
+      };
+      reader.readAsDataURL(file);
     });
+    event.target.value = '';
+  }
 
-    const data = await res.json();
+  function eliminarImagen(idx) {
+    imagenes.splice(idx, 1);
+    renderImagenes();
+  }
 
-    if (!res.ok) {
-      if (data.needsRecharge) {
-        mostrarNotificacion('⚡ Sin créditos. Compra un pack para continuar.', 'warn');
-        abrirModal();
-      } else {
-        throw new Error(data.error || 'Error desconocido');
-      }
+  function renderImagenes() {
+    const preview = document.getElementById('imagenesPreview');
+    preview.innerHTML = imagenes.map((img, i) => `
+      <div class="img-thumb">
+        <img src="${img.base64}" alt="${img.nombre}" />
+        <button class="remove-img" onclick="eliminarImagen(${i})">×</button>
+      </div>
+    `).join('');
+  }
+
+  // ── Estilo ──
+  function selectPill(el) {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    selectedEstilo = el.textContent.replace(/[✨💎⬜🎨🏢🌸🔥]/gu, '').trim();
+  }
+
+  // ── Loading steps ──
+  function animateLoadingSteps() {
+    const steps = ['ls1','ls2','ls3','ls4'];
+    const delays = [0, 4000, 8000, 12000];
+    steps.forEach((id, i) => {
+      setTimeout(() => {
+        if (i > 0) {
+          const prev = document.getElementById(steps[i-1]);
+          if (prev) { prev.classList.remove('active'); prev.classList.add('done'); }
+        }
+        const el = document.getElementById(id);
+        if (el) el.classList.add('active');
+      }, delays[i]);
+    });
+  }
+
+  function resetLoadingSteps() {
+    const labels = ['Analizando tu negocio','Diseñando el layout','Escribiendo el contenido','Aplicando colores y estilo'];
+    ['ls1','ls2','ls3','ls4'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) { el.className = 'lstep' + (i === 0 ? ' active' : ''); el.textContent = (i === 0 ? '→ ' : '○ ') + labels[i]; }
+    });
+  }
+
+  // ── Generar ──
+  async function generar() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const rubro = document.getElementById('rubro').value;
+    if (!nombre || !rubro) { alert('Por favor ingresa el nombre y el rubro de tu negocio.'); return; }
+
+    if (!creditToken || creditCount <= 0) {
+      mostrarToast('⚡ Necesitas créditos para generar.', 'warn');
+      abrirModal();
       return;
     }
 
-    // Actualizar token y créditos
-    if (data.newToken) {
-      creditToken = data.newToken;
-      creditCount = data.creditsLeft;
-      guardarCreditos();
+    const btn = document.getElementById('btnGen');
+    btn.disabled = true;
+    document.getElementById('btnText').textContent = 'Generando...';
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('previewFrame').style.display = 'none';
+    document.getElementById('toolbarActions').style.display = 'none';
+    document.getElementById('loadingState').style.display = 'flex';
+    document.getElementById('previewLabel').textContent = 'generando...';
+    resetLoadingSteps();
+    animateLoadingSteps();
+
+    const body = {
+      nombre, rubro,
+      tipoPagina: Array.from(tiposSeleccionados),
+      descripcion: document.getElementById('descripcion').value.trim(),
+      telefono: document.getElementById('telefono').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      ciudad: document.getElementById('ciudad').value.trim(),
+      horario: document.getElementById('horario').value.trim(),
+      redesSociales: document.getElementById('redesSociales').value.trim(),
+      estilo: selectedEstilo,
+      c1: document.getElementById('c1').value,
+      c2: document.getElementById('c2').value,
+      c3: document.getElementById('c3').value,
+      c4: document.getElementById('c4').value,
+      productos: productos.filter(p => p.nombre),
+      faq: faqs.filter(f => f.pregunta),
+      imagenes: imagenes.map(img => ({ nombre: img.nombre, base64: img.base64, tipo: img.tipo }))
+    };
+
+    try {
+      const res = await fetch('/api/generar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${creditToken}` },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (data.needsRecharge) { mostrarToast('⚡ Sin créditos. Compra un pack.', 'warn'); abrirModal(); }
+        else throw new Error(data.error || 'Error desconocido');
+        return;
+      }
+
+      if (data.newToken) { creditToken = data.newToken; creditCount = data.creditsLeft; guardarCreditos(); }
+
+      generatedHTML = data.html;
+      document.getElementById('loadingState').style.display = 'none';
+      const frame = document.getElementById('previewFrame');
+      frame.style.display = 'block';
+      frame.srcdoc = generatedHTML;
+      document.getElementById('previewLabel').textContent = nombre.toLowerCase().replace(/\s+/g, '-') + '.cl';
+      document.getElementById('toolbarActions').style.display = 'flex';
+      mostrarToast(`✅ Página generada. Te quedan ${creditCount} créditos.`);
+
+    } catch (err) {
+      document.getElementById('loadingState').innerHTML = `
+        <div style="text-align:center;padding:2rem">
+          <div style="font-size:40px;margin-bottom:12px">⚠️</div>
+          <h3 style="color:#c62828;margin-bottom:8px">Error al generar</h3>
+          <p style="color:#666;font-size:14px;max-width:300px;line-height:1.6">${err.message}</p>
+          <button onclick="location.reload()" style="margin-top:16px;padding:10px 24px;background:#6C63FF;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">Reintentar</button>
+        </div>`;
     }
 
-    generatedHTML = data.html;
-    document.getElementById('loadingState').style.display = 'none';
-    const frame = document.getElementById('previewFrame');
-    frame.style.display = 'block';
-    frame.srcdoc = generatedHTML;
-    document.getElementById('previewLabel').textContent = nombre.toLowerCase().replace(/\s+/g, '-') + '.cl';
-    document.getElementById('toolbarActions').style.display = 'flex';
-    mostrarNotificacion(`✅ Página generada. Te quedan ${creditCount} créditos.`);
-
-  } catch (err) {
-    document.getElementById('loadingState').innerHTML = `
-      <div style="text-align:center;padding:2rem">
-        <div style="font-size:40px;margin-bottom:12px">⚠️</div>
-        <h3 style="color:#c62828;margin-bottom:8px">Error al generar</h3>
-        <p style="color:#666;font-size:14px;max-width:300px;line-height:1.6">${err.message}</p>
-        <button onclick="location.reload()" style="margin-top:16px;padding:10px 24px;background:#6C63FF;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">Reintentar</button>
-      </div>`;
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = '✦ Regenerar página';
   }
 
-  btn.disabled = false;
-  document.getElementById('btnText').textContent = '✦ Regenerar página';
-}
+  // ── Descargar ──
+  function descargar() {
+    if (!generatedHTML) return;
+    const nombre = document.getElementById('nombre').value.trim() || 'mi-negocio';
+    const filename = nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-') + '.html';
+    const blob = new Blob([generatedHTML], { type: 'text/html;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+  }
 
-/* ─── Descargar HTML ─── */
-function descargar() {
-  if (!generatedHTML) return;
-  const nombre = document.getElementById('nombre').value.trim() || 'mi-negocio';
-  const filename = nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-') + '.html';
-  const blob = new Blob([generatedHTML], { type: 'text/html;charset=utf-8' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  a.click();
-}
+  // ── Copiar ──
+  function copiarHTML() {
+    if (!generatedHTML) return;
+    navigator.clipboard.writeText(generatedHTML).then(() => {
+      const btn = document.getElementById('btnCopy');
+      btn.textContent = '✓ Copiado';
+      setTimeout(() => { btn.textContent = '📋 Copiar código'; }, 2500);
+    });
+  }
 
-/* ─── Copiar HTML ─── */
-function copiarHTML() {
-  if (!generatedHTML) return;
-  navigator.clipboard.writeText(generatedHTML).then(() => {
-    const btn = document.getElementById('btnCopy');
-    btn.textContent = '✓ Copiado';
-    setTimeout(() => { btn.textContent = '📋 Copiar código'; }, 2500);
-  });
-}
+  // ── Modal ──
+  function abrirModal() { document.getElementById('modalOverlay').classList.add('open'); }
+  function cerrarModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+  function cerrarModalFuera(e) { if (e.target === document.getElementById('modalOverlay')) cerrarModal(); }
 
-/* ─── Notificación toast ─── */
-function mostrarNotificacion(msg, tipo = 'success') {
-  const toast = document.createElement('div');
-  toast.style.cssText = `
-    position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-    background:${tipo === 'warn' ? '#e65100' : '#2e7d32'};color:#fff;
-    padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;
-    box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:9999;
-    animation:fadeIn 0.3s ease;
-  `;
-  toast.textContent = msg;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 4000);
-}
-  </script>
+  function selectPlan(el, plan) {
+    document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedPlan = plan;
+  }
+
+  async function iniciarPago() {
+    const email = document.getElementById('modalEmail').value.trim();
+    if (!email || !email.includes('@')) { alert('Por favor ingresa un correo válido.'); return; }
+    const btn = document.getElementById('btnPagar');
+    btn.disabled = true;
+    btn.textContent = 'Redirigiendo...';
+    try {
+      const res = await fetch('/api/crear-pago', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: selectedPlan, email })
+      });
+      const data = await res.json();
+      if (data.checkoutUrl) window.location.href = data.checkoutUrl;
+      else throw new Error(data.error || 'Error al crear el pago');
+    } catch (err) {
+      alert('Error: ' + err.message);
+      btn.disabled = false;
+      btn.textContent = 'Pagar con Mercado Pago';
+    }
+  }
+
+  // ── Toast ──
+  function mostrarToast(msg, tipo = 'success') {
+    const t = document.createElement('div');
+    t.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+      background:${tipo==='warn'?'#e65100':'#2e7d32'};color:#fff;padding:12px 24px;
+      border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,0.2);
+      z-index:9999;white-space:nowrap;`;
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 4000);
+  }
+</script>
 </body>
 </html>
