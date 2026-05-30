@@ -1055,7 +1055,9 @@ async function generar() {
   }
 
   // Verificar créditos
-  if (!creditToken || creditCount <= 0) {
+  // Verificar créditos (MODO TEST - quitar antes de producción)
+const MODO_TEST = true;
+if (!MODO_TEST && (!creditToken || creditCount <= 0)) {
     mostrarNotificacion('⚡ Necesitas créditos para generar. ¡Compra un pack!', 'warn');
     abrirModal();
     return;
