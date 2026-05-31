@@ -78,12 +78,20 @@
     .color-label { font-size: 11px; color: var(--gray-400); font-weight: 500; }
 
     /* PRODUCTOS */
-    .productos-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
-    .producto-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 10px; position: relative; }
-    .producto-item .grid3 { display: grid; grid-template-columns: 1fr 80px; gap: 8px; margin-bottom: 6px; }
+    .productos-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+    .producto-item { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 12px; position: relative; }
+    .producto-item .grid2p { display: grid; grid-template-columns: 1fr 90px; gap: 8px; margin-bottom: 8px; }
     .producto-item input, .producto-item textarea { width: 100%; padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; }
     .producto-item input:focus, .producto-item textarea:focus { border-color: var(--purple); }
-    .producto-item textarea { height: 50px; resize: none; }
+    .producto-item textarea { height: 50px; resize: none; margin-bottom: 8px; }
+    .producto-item .prod-label { font-size: 11px; color: var(--gray-600); font-weight: 500; margin-bottom: 3px; display: block; }
+    .prod-imgs-wrap { margin-top: 6px; }
+    .prod-imgs-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .prod-img-thumb { position: relative; width: 56px; height: 56px; }
+    .prod-img-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid var(--gray-200); }
+    .prod-img-thumb .remove-img { position: absolute; top: -5px; right: -5px; background: #c62828; color: #fff; border: none; border-radius: 50%; width: 16px; height: 16px; font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .btn-upload-prod { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border: 1.5px dashed var(--gray-200); border-radius: 6px; font-size: 12px; color: var(--purple); cursor: pointer; background: transparent; transition: all 0.15s; }
+    .btn-upload-prod:hover { border-color: var(--purple); background: var(--purple-light); }
     .btn-remove { position: absolute; top: 8px; right: 8px; background: #fce4ec; color: #c62828; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
     .btn-add { width: 100%; padding: 8px; border: 1.5px dashed var(--gray-200); border-radius: var(--radius-sm); background: transparent; font-size: 13px; color: var(--purple); cursor: pointer; font-weight: 500; transition: all 0.15s; }
     .btn-add:hover { border-color: var(--purple); background: var(--purple-light); }
@@ -311,11 +319,11 @@
       </div>
     </div>
 
-    <!-- PASO 4: Productos (condicional) -->
-    <div class="step-block section-toggle" id="seccionProductos">
+    <!-- PASO 4: Productos (siempre visible) -->
+    <div class="step-block" id="seccionProductos">
       <div class="step-header">
         <div class="step-number">4</div>
-        <div><div class="step-title">Productos o servicios</div><div class="step-sub">Agrega los items de tu catálogo</div></div>
+        <div><div class="step-title">Productos o servicios</div><div class="step-sub">Cada producto puede tener sus propias fotos</div></div>
       </div>
       <div class="productos-list" id="productosList"></div>
       <button class="btn-add" onclick="agregarProducto()">+ Agregar producto o servicio</button>
@@ -331,19 +339,19 @@
       <button class="btn-add" onclick="agregarFaq()">+ Agregar pregunta</button>
     </div>
 
-    <!-- PASO 6: Imágenes -->
+    <!-- PASO 6: Fotos generales del negocio -->
     <div class="step-block">
       <div class="step-header">
         <div class="step-number">6</div>
-        <div><div class="step-title">Fotos del negocio</div><div class="step-sub">Opcionales — se incluyen dentro del HTML</div></div>
+        <div><div class="step-title">Fotos generales del negocio</div><div class="step-sub">Para la galería, hero o fondo (opcionales)</div></div>
       </div>
-      <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-        <input type="file" id="fileInput" accept="image/*" multiple onchange="handleImages(event)" />
+      <div class="upload-area" onclick="document.getElementById('fileInputGeneral').click()">
+        <input type="file" id="fileInputGeneral" accept="image/*" multiple onchange="handleImagenesGenerales(event)" />
         <div class="upload-icon">📷</div>
-        <div class="upload-text">Haz clic para subir fotos</div>
-        <div class="upload-hint">JPG, PNG o WebP · Máx 5 fotos · 2MB cada una</div>
+        <div class="upload-text">Haz clic para subir fotos del local</div>
+        <div class="upload-hint">JPG, PNG o WebP · Máx 8 fotos · 2MB cada una</div>
       </div>
-      <div class="imagenes-preview" id="imagenesPreview"></div>
+      <div class="imagenes-preview" id="imagenesGeneralesPreview"></div>
     </div>
 
     <!-- PASO 7: Diseño -->
@@ -546,7 +554,7 @@
   // ── Productos ──
   function agregarProducto() {
     const id = Date.now();
-    productos.push({ id, nombre: '', precio: '', descripcion: '' });
+    productos.push({ id, nombre: '', precio: '', descripcion: '', imagenes: [] });
     renderProductos();
   }
 
@@ -560,14 +568,38 @@
     lista.innerHTML = productos.map(p => `
       <div class="producto-item">
         <button class="btn-remove" onclick="eliminarProducto(${p.id})">×</button>
-        <div class="grid3">
-          <input type="text" placeholder="Nombre del producto" value="${p.nombre}"
-            oninput="actualizarProducto(${p.id},'nombre',this.value)" />
-          <input type="text" placeholder="$Precio" value="${p.precio}"
-            oninput="actualizarProducto(${p.id},'precio',this.value)" />
+        <div class="grid2p">
+          <div>
+            <span class="prod-label">Nombre del producto / servicio</span>
+            <input type="text" placeholder="Ej: Corte de cabello" value="${p.nombre}"
+              oninput="actualizarProducto(${p.id},'nombre',this.value)" />
+          </div>
+          <div>
+            <span class="prod-label">Precio</span>
+            <input type="text" placeholder="$9.990" value="${p.precio}"
+              oninput="actualizarProducto(${p.id},'precio',this.value)" />
+          </div>
         </div>
-        <textarea placeholder="Descripción breve del producto o servicio"
+        <textarea placeholder="Descripción breve..."
           oninput="actualizarProducto(${p.id},'descripcion',this.value)">${p.descripcion}</textarea>
+        <div class="prod-imgs-wrap">
+          <span class="prod-label">📸 Fotos de este producto</span>
+          <div class="prod-imgs-row" id="imgsProd_${p.id}">
+            ${p.imagenes.map((img, i) => `
+              <div class="prod-img-thumb">
+                <img src="${img.base64}" alt="${img.nombre}" />
+                <button class="remove-img" onclick="eliminarImgProducto(${p.id},${i})">×</button>
+              </div>
+            `).join('')}
+            ${p.imagenes.length < 5 ? `
+              <label class="btn-upload-prod">
+                📷 Subir foto
+                <input type="file" accept="image/*" multiple style="display:none"
+                  onchange="handleImgProducto(event,${p.id})" />
+              </label>
+            ` : ''}
+          </div>
+        </div>
       </div>
     `).join('');
   }
@@ -575,6 +607,28 @@
   function actualizarProducto(id, campo, valor) {
     const prod = productos.find(p => p.id === id);
     if (prod) prod[campo] = valor;
+  }
+
+  function handleImgProducto(event, prodId) {
+    const prod = productos.find(p => p.id === prodId);
+    if (!prod) return;
+    const files = Array.from(event.target.files);
+    const disponibles = 5 - prod.imagenes.length;
+    files.slice(0, disponibles).forEach(file => {
+      if (file.size > 2 * 1024 * 1024) { mostrarToast(`⚠️ ${file.name} supera 2MB`, 'warn'); return; }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        prod.imagenes.push({ nombre: file.name, base64: e.target.result, tipo: file.type });
+        renderProductos();
+      };
+      reader.readAsDataURL(file);
+    });
+    event.target.value = '';
+  }
+
+  function eliminarImgProducto(prodId, idx) {
+    const prod = productos.find(p => p.id === prodId);
+    if (prod) { prod.imagenes.splice(idx, 1); renderProductos(); }
   }
 
   // ── FAQ ──
@@ -607,39 +661,35 @@
     if (faq) faq[campo] = valor;
   }
 
-  // ── Imágenes ──
-  function handleImages(event) {
-    const files = Array.from(event.target.files);
-    const disponibles = 5 - imagenes.length;
-    const aSubir = files.slice(0, disponibles);
+  // ── Imágenes generales del negocio ──
+  let imagenesGenerales = [];
 
-    aSubir.forEach(file => {
-      if (file.size > 2 * 1024 * 1024) {
-        mostrarToast(`⚠️ ${file.name} supera 2MB y fue omitida.`, 'warn');
-        return;
-      }
+  function handleImagenesGenerales(event) {
+    const files = Array.from(event.target.files);
+    const disponibles = 8 - imagenesGenerales.length;
+    files.slice(0, disponibles).forEach(file => {
+      if (file.size > 2 * 1024 * 1024) { mostrarToast(`⚠️ ${file.name} supera 2MB`, 'warn'); return; }
       const reader = new FileReader();
       reader.onload = (e) => {
-        const base64 = e.target.result;
-        imagenes.push({ nombre: file.name, base64, tipo: file.type });
-        renderImagenes();
+        imagenesGenerales.push({ nombre: file.name, base64: e.target.result, tipo: file.type });
+        renderImagenesGenerales();
       };
       reader.readAsDataURL(file);
     });
     event.target.value = '';
   }
 
-  function eliminarImagen(idx) {
-    imagenes.splice(idx, 1);
-    renderImagenes();
+  function eliminarImgGeneral(idx) {
+    imagenesGenerales.splice(idx, 1);
+    renderImagenesGenerales();
   }
 
-  function renderImagenes() {
-    const preview = document.getElementById('imagenesPreview');
-    preview.innerHTML = imagenes.map((img, i) => `
+  function renderImagenesGenerales() {
+    const preview = document.getElementById('imagenesGeneralesPreview');
+    preview.innerHTML = imagenesGenerales.map((img, i) => `
       <div class="img-thumb">
         <img src="${img.base64}" alt="${img.nombre}" />
-        <button class="remove-img" onclick="eliminarImagen(${i})">×</button>
+        <button class="remove-img" onclick="eliminarImgGeneral(${i})">×</button>
       </div>
     `).join('');
   }
@@ -712,9 +762,14 @@
       c2: document.getElementById('c2').value,
       c3: document.getElementById('c3').value,
       c4: document.getElementById('c4').value,
-      productos: productos.filter(p => p.nombre),
+      productos: productos.filter(p => p.nombre).map(p => ({
+        nombre: p.nombre,
+        precio: p.precio,
+        descripcion: p.descripcion,
+        imagenes: p.imagenes
+      })),
       faq: faqs.filter(f => f.pregunta),
-      imagenes: imagenes.map(img => ({ nombre: img.nombre, base64: img.base64, tipo: img.tipo }))
+      imagenes: imagenesGenerales
     };
 
     try {
